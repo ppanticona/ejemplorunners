@@ -1,5 +1,5 @@
-# Java Gradle CircleCI 2.0 configuration file
-#
+# Java Maven CircleCI 2.0 configuration file
+
 # Check https://circleci.com/docs/2.0/language-java/ for more details
 #
 version: 2
@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/openjdk:8-jdk
+      - image: springframeworkguru/circleci_build
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -22,6 +22,8 @@ jobs:
       TERM: dumb
 
     steps:
+      - setup_remote_docker
+
       - checkout
 
       # Download and cache dependencies
@@ -38,5 +40,26 @@ jobs:
             - ~/.gradle
           key: v1-dependencies-{{ checksum "build.gradle" }}
 
-      # run tests!
+      # run tests and package
       - run: ./gradlew clean test
+
+      - run:
+          name: Save test results
+          command: |
+            mkdir -p ~/junit/
+            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/junit/ \;
+          when: always
+
+      - store_test_results:
+          path: ~/junit
+
+      - store_artifacts:
+          path: ~/junit
+
+      - run:
+          name: install yarn
+          command: sudo npm install -g yarn
+
+      - run:
+          name: Build Docker Image
+          command: ./gradlew bootRepackage -Pprod pushDockerLatest pushDockerVersionTag -x test
