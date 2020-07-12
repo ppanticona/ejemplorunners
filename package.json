@@ -10,7 +10,7 @@
   "dependencies": {
     "@angular/common": "10.0.0",
     "@angular/compiler": "10.0.0",
-    "@angular/core": "10.0.0",
+    "@angular/core": "^10.0.0",
     "@angular/forms": "10.0.0",
     "@angular/localize": "10.0.0",
     "@angular/platform-browser": "10.0.0",
@@ -24,6 +24,7 @@
     "@ngx-translate/http-loader": "5.0.0",
     "bootstrap": "4.5.0",
     "bootswatch": "4.5.0",
+    "lodash": "^4.17.19",
     "moment": "2.27.0",
     "ng-jhipster": "0.14.0",
     "ngx-cookie-service": "3.0.4",
