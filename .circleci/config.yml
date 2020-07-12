@@ -38,7 +38,7 @@ jobs:
                 command: 'node -v'
             - run:
                 name: Print NPM Version
-                command: 'npm -v'
+                command: ' npm -v'
             - run:
                 name: Install Node Modules
                 command: 'npm install'
