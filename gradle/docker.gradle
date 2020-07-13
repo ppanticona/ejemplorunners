@@ -4,7 +4,10 @@ jib {
     }
     to {
         image = "ppanticona/rfbprueba:latest"
-
+        auth {
+            username = 'ppanticona'
+            password = 'C4milit42'
+        }
     }
     container {
         entrypoint = ["bash", "-c", "/entrypoint.sh"]
