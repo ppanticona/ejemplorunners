@@ -4,6 +4,7 @@ jib {
     }
     to {
         image = "ppanticona/rfbprueba:latest"
+
     }
     container {
         entrypoint = ["bash", "-c", "/entrypoint.sh"]
